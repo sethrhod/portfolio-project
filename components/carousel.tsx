@@ -1,114 +1,91 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import {
+  RefObject,
+  use,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 
 export default function Carousel() {
   const images: string[] = [
+    "/images/screenshots/6.png",
     "/images/screenshots/1.png",
     "/images/screenshots/2.png",
     "/images/screenshots/3.png",
     "/images/screenshots/4.png",
     "/images/screenshots/5.png",
     "/images/screenshots/6.png",
+    "/images/screenshots/1.png",
+    "/images/screenshots/2.png",
+    "/images/screenshots/3.png",
   ];
 
-  const Screenshot = (
-    { image }: { image: string },
-    { index }: { index: number }
-  ) => {
-        const useOnScreen = (options: any) => {
-          const [ImageRef, setImageRef] = useState(null);
-          const [visibilty, setVisibility] = useState();
+  const perView = 3;
 
-          useEffect(() => {
-            const observer = new IntersectionObserver(([entry]) => {
-              setVisibility(entry.isIntersecting);
-
-            }, options);
-
-            if (ImageRef) {
-              observer.observe(ImageRef);
-            }
-
-            return () => {
-              if (ImageRef) {
-                observer.unobserve(ImageRef);
-              }
-            };
-          }, [ImageRef, options]);
-
-          return [setImageRef];
-        };
-
-        const [setImageRef] = useOnScreen({
-          root: SliderRef.current,
-          rootMargin: "100px",
-        });
-
-    return (
-      <Image
-        ref={setImageRef}
-        src={image}
-        key={index}
-        alt="Project Screenshot"
-        width={200}
-        height={200}
-        className="inline-block transition duration-500 ease-in-out"
-      />
-    );
-  };
-
-  const SliderRef: RefObject<HTMLDivElement> = useRef(null);
-
-  let totalScroll = 0;
+  const SliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const perView = 3;
-    const imageItems = SliderRef.current.children;
+    if (SliderRef.current !== null) {
+      SliderRef.current.style.setProperty("--per-view", perView.toString());
 
-    SliderRef.current.style.setProperty("--per-view", perView.toString());
-
-    for (let i = 0; i < perView; i++) {
-      SliderRef.current.appendChild(imageItems[i].cloneNode(true));
-    }
-
-    function handleScroll(event) {
-      totalScroll++;
-      if (totalScroll == imageItems.length - perView + 1) {
-        totalScroll = 1;
-      }
-      SliderRef.current.scrollLeft =
-        (SliderRef.current.scrollWidth / imageItems.length) * totalScroll;
-    }
-
-    if (SliderRef.current) {
-      SliderRef.current.addEventListener(
-        "wheel",
-        (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          event.stopImmediatePropagation();
-          handleScroll(event);
-        },
-        { passive: false }
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("scale-75");
+            } else {
+              entry.target.classList.add("scale-75");
+            }
+          }),
+        {
+          root: SliderRef.current,
+          rootMargin: "1%",
+        }
       );
+
+      let renderedImages = Array.from(SliderRef.current.children);
+
+      const lastCardObserver = new IntersectionObserver((entries) => {
+        const lastCard = entries[0];
+        if (lastCard.isIntersecting) {
+          for (let i = 0; i < perView; i++) {
+            renderedImages[i].classList.remove("scale-75");
+          }
+          SliderRef.current.scrollLeft = 0;
+        }
+      }, {});
+
+      lastCardObserver.observe(SliderRef.current.lastElementChild);
+
+      renderedImages.forEach((image) => {
+        observer.observe(image);
+      });
     }
-  }, [SliderRef, images]);
+  }, []);
 
   return (
-    <div className="flex items-center ">
+    <div className="block items-center justify-center">
       <div
         id="slider"
         ref={SliderRef}
-        className="grid grid-flow-col gap-4 overflow-x-scroll"
+        className="grid grid-flow-col gap-4 overflow-x-scroll scrollbar-hide"
         style={{
           gridAutoColumns:
             "calc((100% - (1.5rem * (var(--per-view) - 1))) / var(--per-view))",
-          position: "relative",
-          transition: "all 0.3s ease 0s",
         }}
       >
         {images.map((image, index) => (
-          <Screenshot image={image} key={index} />
+          <Image
+            id="img"
+            src={image}
+            data-index={index}
+            alt="Project Screenshot"
+            width={200}
+            height={200}
+            className="inline-block transition-transform duration-500 ease-out"
+          />
         ))}
       </div>
     </div>

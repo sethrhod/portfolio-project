@@ -3,9 +3,9 @@ import Carousel from "./carousel";
 export default function ProjectShowcase() {
 
   return (
-    <div className="flex">
+    <div className="flex absolute">
       <Carousel />
-      <div className="inline w-fit bg-neutral-200 m-5 p-4 text-left">
+      <div className="block w-fit bg-neutral-200 m-5 p-4 text-left">
         <h2 className="text-lg font-bold">ATC conferences App</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
