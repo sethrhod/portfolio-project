@@ -10,16 +10,16 @@ import Image from "next/image";
 
 export default function Carousel() {
   const images: string[] = [
-    "/images/screenshots/6.png",
-    "/images/screenshots/1.png",
     "/images/screenshots/2.png",
+    "/images/screenshots/1.png",
     "/images/screenshots/3.png",
+    "/images/screenshots/6.png",
     "/images/screenshots/4.png",
     "/images/screenshots/5.png",
-    "/images/screenshots/6.png",
-    "/images/screenshots/1.png",
     "/images/screenshots/2.png",
+    "/images/screenshots/1.png",
     "/images/screenshots/3.png",
+    "/images/screenshots/6.png",
   ];
 
   const perView = 3;
@@ -30,38 +30,60 @@ export default function Carousel() {
     if (SliderRef.current !== null) {
       SliderRef.current.style.setProperty("--per-view", perView.toString());
 
-      const observer = new IntersectionObserver(
+      const enteringObserver = new IntersectionObserver(
         (entries) =>
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.remove("scale-75");
+              entry.target.classList.remove("scale-75")
             } else {
-              entry.target.classList.add("scale-75");
+              entry.target.classList.add(
+                "transition-transform",
+                "duration-500",
+                "ease-out",
+                "scale-75"
+              );
             }
           }),
         {
           root: SliderRef.current,
-          rootMargin: "1%",
+          rootMargin: "4%",
         }
       );
 
       let renderedImages = Array.from(SliderRef.current.children);
 
-      const lastCardObserver = new IntersectionObserver((entries) => {
-        const lastCard = entries[0];
-        if (lastCard.isIntersecting) {
-          for (let i = 0; i < perView; i++) {
-            renderedImages[i].classList.remove("scale-75");
+      const observeRenderedImages = () => {
+        renderedImages.forEach((image) => {
+          enteringObserver.observe(image);
+        });
+      };
+
+      const lastCardObserver = new IntersectionObserver(
+        (entries) => {
+          const lastCard = entries[0];
+          if (lastCard.isIntersecting) {
+            for (let i = 0; i < perView; i++) {
+              renderedImages[i].classList.remove(
+                "transition-transform",
+                "duration-500",
+                "ease-out",
+                "scale-75"
+              );
+            }
+            SliderRef.current.scrollLeft = 0;
+            observeRenderedImages();
           }
-          SliderRef.current.scrollLeft = 0;
+        },
+        {
+          root: SliderRef.current,
+          rootMargin: "4%",
+          threshold: 0,
         }
-      }, {});
+      );
 
       lastCardObserver.observe(SliderRef.current.lastElementChild);
 
-      renderedImages.forEach((image) => {
-        observer.observe(image);
-      });
+      observeRenderedImages();
     }
   }, []);
 
@@ -82,8 +104,8 @@ export default function Carousel() {
             src={image}
             data-index={index}
             alt="Project Screenshot"
-            width={200}
-            height={200}
+            width={300}
+            height={300}
             className="inline-block transition-transform duration-500 ease-out"
           />
         ))}
