@@ -1,15 +1,14 @@
 import Image from 'next/image'
-import styles from '../styles/Headshot.module.css'
 
-export default function Headshot() {
+export default function Headshot({style}) {
   return (
-    <div className={styles.container}>
+    <div className={style}>
       <Image
         src="/images/Seth-Headshot.jpg"
         alt="Seth Rhodes Headshot"
-        height={500}
-        width={500}
-        className={styles.headshot}
+        height={1000}
+        width={1000}
+        className="w-full h-full object-cover"
       />
     </div>
   )

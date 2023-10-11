@@ -20,9 +20,17 @@ export default function Carousel() {
     "/images/screenshots/1.png",
     "/images/screenshots/3.png",
     "/images/screenshots/6.png",
+    "/images/screenshots/4.png",
   ];
 
-  const perView = 3;
+  //if screen is mobile set perView to 1
+  const perView: number = getPerView();
+
+  function getPerView(): number {
+    if (typeof window !== "undefined") {
+      return window.innerWidth < 768 ? 1 : 4;
+    }
+  }
 
   const SliderRef = useRef<HTMLDivElement>(null);
 
@@ -88,7 +96,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="block items-center justify-center">
+    <div className="flex flex-1 transition-all items-center justify-center">
       <div
         id="slider"
         ref={SliderRef}
@@ -101,6 +109,7 @@ export default function Carousel() {
         {images.map((image, index) => (
           <Image
             id="img"
+            key={index}
             src={image}
             data-index={index}
             alt="Project Screenshot"
