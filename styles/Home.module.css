@@ -94,7 +94,7 @@
   flex: 2;
   margin-top: 0;
   max-width: fit-content;
-  animation: appearLeft 1.5s ease;
+  transition: all 0.5s ease;
 }
 
 .bio {
@@ -105,28 +105,10 @@
   padding: 1rem;
   text-align: left;
   --tw-bg-opacity: 1;
+  transition: all 0.5s ease;
   background-color: rgb(245 245 244 / var(--tw-bg-opacity));
   animation: appearRight 1.5s ease;
 }
-
-.carousel {
-  animation: appearLeft 1.5s ease;
-}
-
-.description {
-  animation: appearRight 1.5s ease;
-}
-
-.carouselReverse {
-  animation: appearLeft 1.5s ease;
-  animation-direction: reverse;
-}
-
-.descriptionReverse {
-  animation: appearRight 1.5s ease;
-  animation-direction: reverse;
-}
-
 
 @keyframes appearLeft {
   0% {
@@ -142,11 +124,11 @@
 @keyframes appearRight {
   0% {
     opacity: 0;
-    transform: translateX(60%);
+    /* transform: translateX(60%); */
   }
   100% {
     opacity: 1;
-    transform: translateX(0%);
+    /* transform: translateX(0%); */
   }
 }
 

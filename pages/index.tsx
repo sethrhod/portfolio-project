@@ -1,43 +1,63 @@
 import Layout from "../components/layout";
-import Headshot from "../components/headshot";
-import Bio from "../components/bio";
+import { useState, useRef, useEffect } from "react";
+import React from "react";
 import ProjectShowcase from "../components/project_showcase";
-import Resume from "../components/resume";
-import { useEffect, useRef } from "react";
-import styles from "../styles/Home.module.css";
+import About from "../components/about";
+import Headshot from "../components/headshot";
 
 export default function Home() {
+  const mainRef = useRef<HTMLDivElement>(null);
+  const [currentScreen, setCurrentScreen] = useState<string>("bio");
+  const screens = {
+    bio: ( 
+      <Headshot
+        currentScreen={currentScreen}
+        setCurrentScreen={setCurrentScreen}
+      />
+    ),
+    project: (
+      <ProjectShowcase
+        setCurrentScreen={setCurrentScreen}
+        currentScreen={currentScreen}
 
-  const ref = useRef<HTMLDivElement>(null);
+      />
+    ),
+    about: <About
+      setCurrentScreen={setCurrentScreen}
+      currentScreen={currentScreen}
+     />,
+  };
 
-  useEffect(() => {
-    const Observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove("opacity-0");
-          } else {
-            entry.target.classList.add("opacity-0");
-          }
-        }),
-      {
-        threshold: 0.50,
-      }
-    );
-    Observer.observe(ref.current);
-  }, []);
+  // useEffect(() => {
+  // if (mainRef.current) {
+  //   setScreens(mainRef.current.children.length);
+  // }
+  // window.scrollTo({
+  //   top: (mainRef.current?.children[currentScreen] as HTMLElement)?.offsetTop,
+  //   behavior: "smooth",
+  // });
+  // if (headshotRef.current) {
+  //   headshotRef.current.addEventListener("animationend", () => {
+  //     setTransitionEnd(true);
+  //   });
+  // }
+  // return () => {
+  //   if (headshotRef.current) {
+  //     headshotRef.current.removeEventListener("animationend", () => {
+  //       setTransitionEnd(true);
+  //     });
+  //   }
+  // };
+  // }, [
+  //   currentScreen,
+  //   (mainRef.current?.children[currentScreen] as HTMLElement)?.offsetTop,
+  //   mainRef.current,
+  // ]);
 
   return (
     <Layout>
-      <div className="flex-1 flex-col justify-center items-center bg-stone-100">
-        <div className="flex flex-col w-screen h-screen justify-center items-center">
-          <main ref={ref} className="flex flex-1 flex-col md:flex-row transition-all duration-500 ease-in-out">
-            <Headshot style={styles.headshot} />
-            <Bio style={styles.bio} />
-          </main>
-        </div>
-        <ProjectShowcase />
-        <Resume />
+      <div ref={mainRef} className="justify-center items-center">
+        {screens[currentScreen]}
       </div>
     </Layout>
   );

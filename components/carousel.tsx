@@ -8,7 +8,7 @@ import {
 } from "react";
 import Image from "next/image";
 
-export default function Carousel() {
+export default function Carousel({}) {
   const images: string[] = [
     "/images/screenshots/2.png",
     "/images/screenshots/1.png",
@@ -36,13 +36,18 @@ export default function Carousel() {
 
   useEffect(() => {
     if (SliderRef.current !== null) {
+      SliderRef.current.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        SliderRef.current.scrollLeft += e.deltaY;
+      });
+
       SliderRef.current.style.setProperty("--per-view", perView.toString());
 
       const enteringObserver = new IntersectionObserver(
         (entries) =>
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.remove("scale-75")
+              entry.target.classList.remove("scale-75");
             } else {
               entry.target.classList.add(
                 "transition-transform",
@@ -93,7 +98,7 @@ export default function Carousel() {
 
       observeRenderedImages();
     }
-  }, []);
+  }, [SliderRef.current, perView]);
 
   return (
     <div className="flex flex-1 transition-all items-center justify-center">
