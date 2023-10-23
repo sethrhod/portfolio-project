@@ -1,6 +1,5 @@
 import Carousel from "./carousel";
-import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function ProjectShowcase({
   setCurrentScreen,

@@ -6,10 +6,9 @@ import {
   useRef,
   useState,
 } from "react";
-import Image from "next/image";
 
 export default function Carousel({}) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+  const baseUrl = "https://sethrhod.github.io/portfolio-project/";
 
   const images: string[] = [
     `${baseUrl}/2.png`,
