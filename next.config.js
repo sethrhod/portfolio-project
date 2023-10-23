@@ -1,5 +1,11 @@
 module.exports = {
+  output: 'export',
   images: {
+    domains: ["play.google.com", "developer.apple.com"],
+    deviceSizes: [320, 640, 768, 1024, 1600],
+    imageSizes: [16, 32, 48, 64, 96],
+    path: "/_next/image",
+    loader: "default",
     remotePatterns: [
       {
         protocol: "https",
