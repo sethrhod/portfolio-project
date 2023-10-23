@@ -6,7 +6,6 @@ import * as React from "react";
 import { useGLTF } from "@react-three/drei";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useFrame } from "@react-three/fiber";
-import { MeshNormalMaterial } from "three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -27,7 +26,7 @@ export function Model() {
     const y = Math.cos(rot) * 0.7;
     myMesh.current.rotation.set(0, y, 0);
   });
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+  const baseUrl = 'https://sethrhod.github.io/portfolio-project/';
   const { nodes } = useGLTF(`${baseUrl}/shuma-gorath7.stl`) as GLTFResult;
   return (
     <group scale={10} position={[0, -3, 0]} dispose={null}>

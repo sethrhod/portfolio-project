@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useCallback, useState } from "react";
 import Bio from "./bio";
 
@@ -58,7 +57,7 @@ export default function Headshot({
     [currentScreen, localCurrentScreen, setCurrentScreen]
   );
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+  const baseUrl = 'https://sethrhod.github.io/portfolio-project/';
 
   return (
     !transitionEnd && (
