@@ -64,7 +64,7 @@ export default function Headshot({
         ref={headshotRef}
         className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out"
       >
-        <div className="flex flex-1 mt-0 transition-all duration-1000">
+        <div className="flex flex-1 transition-all duration-1000">
           <Image
             src="/images/Seth-Headshot.jpg"
             alt="Seth Rhodes Headshot"

@@ -8,12 +8,10 @@ export default function About({
   setCurrentScreen: React.Dispatch<React.SetStateAction<string>>;
   currentScreen: string;
 }) {
-
   const [transitionEnd, setTransitionEnd] = useState<boolean>(false);
   const [localCurrentScreen, setLocalCurrentScreen] =
     useState<string>(currentScreen);
 
-    
   const ref = useCallback(
     (node: HTMLDivElement) => {
       if (node && localCurrentScreen !== "about") {
@@ -80,24 +78,25 @@ export default function About({
     !transitionEnd && (
       <div
         ref={ref}
-        className="flex h-screen flex-col transition-all duration-500 ease-in-out"
+        className="flex h-screen flex-col md:items-center transition-all duration-500 ease-in-out"
       >
-        <button
-          onClick={() => {
-            setLocalCurrentScreen("bio");
-          }}
-        >
-          Back
-        </button>
-        <div className="flex flex-1 flex-col bg-stone-100 p-4">
-          <h1 className="text-2xl">About Me</h1>
-          <p>
+        <div className="flex md:w-1/2 flex-col bg-stone-100 p-4">
+          <button
+            onClick={() => {
+              setLocalCurrentScreen("bio");
+            }}
+          >
+            Back
+          </button>
+          <h1 className="text-6xl mb-4">About Me</h1>
+          <p className="text-2xl">
             I spend most of my time learning new technologies and building
             things but I also enjoy playing video games, practicing Muay Thai,
             rock climbing, and making art.
             <br />
             <br />
-            I've been using Blender to learn 3D modeling and animation. Here's one of my creations.
+            I've been using Blender to learn 3D modeling and animation. Here's
+            one of my creations.
           </p>
         </div>
         <Scene />

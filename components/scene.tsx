@@ -8,14 +8,12 @@ import { Model } from "./model";
 
 export default function Scene() {
   return (
-    <div className="flex-1">
-      <Canvas>
-        <CameraControls minPolarAngle={0} maxPolarAngle={Math.PI / 1.6} />
-        <ambientLight intensity={Math.PI / 2} />
-        <Model />
-        <Environment preset="sunset" />
-        <PerspectiveCamera makeDefault position={[0, 0, 13]} />
-      </Canvas>
-    </div>
+    <Canvas>
+      <CameraControls minPolarAngle={0} maxPolarAngle={Math.PI / 1.6} />
+      <ambientLight intensity={Math.PI / 2} />
+      <Model />
+      <Environment preset="sunset" />
+      <PerspectiveCamera makeDefault position={[0, 0, 13]} />
+    </Canvas>
   );
 }

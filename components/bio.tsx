@@ -14,57 +14,56 @@ export default function Bio({ setLocalCurrentScreen }) {
   };
 
   return (
-    <div className="flex flex-1 flex-col bg-opacity-100 transition-all bg-stone-100">
-      <div className="p-6">
-        <h1 className="text-6xl">Seth Rhodes</h1>
-      </div>
-      <div className="flex flex-1 p-6">
-        <p className="text-xl">
-          Dedicated, self-motivated, and self-taught React developer with a
-          unique palette for creative and ergonomic designs.
-          Passionate about learning and contributing in collaborative team
-          environments.
-          Seeking to leverage my React skills to add value to projects.
-        </p>
-      </div>
-      <div className="flex flex-1 flex-col p-6">
-        <button
-          name="project"
-          onClick={handleClick}
-          className="text-black hover:text-sky-800 font-bold text-lg"
-        >
-          ATC Conferences App
-        </button>
-        <button
-          name="about"
-          onClick={handleClick}
-          className="text-black hover:text-sky-800 font-bold text-lg"
-        >
-          More about me
-        </button>
-        <button
-          name="resume"
-          onClick={handleClick}
-          className="text-black hover:text-sky-800 font-bold text-lg"
-        >
-          View my resume
-        </button>
-      </div>
-      <div className="flex flex-1 flex-row justify-evenly items-center m-2">
-        <a href="https://github.com/sethrhod">
-          <FontAwesomeIcon
-            icon={faGithub}
-            size="5x"
-            className="hover:text-sky-800"
-          />
-        </a>
-        <a href="https://www.linkedin.com/in/seth-rhodes-80375a238/">
-          <FontAwesomeIcon
-            icon={faLinkedinIn}
-            size="5x"
-            className="hover:text-sky-800"
-          />
-        </a>
+    <div className="flex flex-[2] justify-center bg-opacity-100 transition-all bg-stone-100">
+      <div className="flex flex-col justify-around md:w-3/4">
+        <div className="flex flex-[2] justify-end flex-col mr-6 ml-6 md:mr-0 md:ml-0">
+          <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
+          <p className="md:text-2xl text-lg">
+            Dedicated, self-motivated, and self-taught React developer with a
+            unique palette for creative and ergonomic designs. Passionate about
+            learning and contributing in collaborative team environments.
+            Seeking to leverage my React skills to add value to projects.
+          </p>
+          <div className="flex flex-col justify-center font-bold mt-6 md:mt-10 md:text-xl">
+            <button
+              name="project"
+              onClick={handleClick}
+              className="text-black hover:text-sky-800"
+            >
+              ATC Conferences App
+            </button>
+            <button
+              name="about"
+              onClick={handleClick}
+              className="text-black hover:text-sky-800"
+            >
+              More about me
+            </button>
+            <button
+              name="resume"
+              onClick={handleClick}
+              className="text-black hover:text-sky-800"
+            >
+              View my resume
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-row justify-evenly items-center m-2">
+          <a href="https://github.com/sethrhod">
+            <FontAwesomeIcon
+              icon={faGithub}
+              size="5x"
+              className="hover:text-sky-800"
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/seth-rhodes-80375a238/">
+            <FontAwesomeIcon
+              icon={faLinkedinIn}
+              size="5x"
+              className="hover:text-sky-800"
+            />
+          </a>
+        </div>
       </div>
     </div>
   );
