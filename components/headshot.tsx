@@ -66,7 +66,7 @@ export default function Headshot({
       >
         <div className="flex flex-1 transition-all duration-1000">
           <img
-            src="/images/Seth-Headshot.jpg"
+            src="/Seth-Headshot.jpg"
             alt="Seth Rhodes Headshot"
             className="w-full h-full object-cover"
           />

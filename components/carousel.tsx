@@ -10,17 +10,17 @@ import Image from "next/image";
 
 export default function Carousel({}) {
   const images: string[] = [
-    "/images/screenshots/2.png",
-    "/images/screenshots/1.png",
-    "/images/screenshots/3.png",
-    "/images/screenshots/6.png",
-    "/images/screenshots/4.png",
-    "/images/screenshots/5.png",
-    "/images/screenshots/2.png",
-    "/images/screenshots/1.png",
-    "/images/screenshots/3.png",
-    "/images/screenshots/6.png",
-    "/images/screenshots/4.png",
+    "/2.png",
+    "/1.png",
+    "/3.png",
+    "/6.png",
+    "/4.png",
+    "/5.png",
+    "/2.png",
+    "/1.png",
+    "/3.png",
+    "/6.png",
+    "/4.png",
   ];
 
   //if screen is mobile set perView to 1
