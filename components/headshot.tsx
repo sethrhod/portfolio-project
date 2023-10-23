@@ -31,8 +31,8 @@ export default function Headshot({
         observer.observe(node.children[0]);
         node.animate(
           [
-            { transform: "translateX(0%)", opacity: 1},
-            { transform: "translateX(-60%)", opacity: 0},
+            { transform: "translateX(0%)", opacity: 1 },
+            { transform: "translateX(-60%)", opacity: 0 },
           ],
           {
             duration: 500,
@@ -65,11 +65,9 @@ export default function Headshot({
         className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out"
       >
         <div className="flex flex-1 transition-all duration-1000">
-          <Image
+          <img
             src="/images/Seth-Headshot.jpg"
             alt="Seth Rhodes Headshot"
-            height={1000}
-            width={1000}
             className="w-full h-full object-cover"
           />
         </div>
