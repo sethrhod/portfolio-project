@@ -9,18 +9,20 @@ import {
 import Image from "next/image";
 
 export default function Carousel({}) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+
   const images: string[] = [
-    "/2.png",
-    "/1.png",
-    "/3.png",
-    "/6.png",
-    "/4.png",
-    "/5.png",
-    "/2.png",
-    "/1.png",
-    "/3.png",
-    "/6.png",
-    "/4.png",
+    `${baseUrl}/2.png`,
+    `${baseUrl}/1.png`,
+    `${baseUrl}/3.png`,
+    `${baseUrl}/6.png`,
+    `${baseUrl}/4.png`,
+    `${baseUrl}/5.png`,
+    `${baseUrl}/2.png`,
+    `${baseUrl}/1.png`,
+    `${baseUrl}/3.png`,
+    `${baseUrl}/6.png`,
+    `${baseUrl}/4.png`,
   ];
 
   //if screen is mobile set perView to 1

@@ -27,7 +27,8 @@ export function Model() {
     const y = Math.cos(rot) * 0.7;
     myMesh.current.rotation.set(0, y, 0);
   });
-  const { nodes } = useGLTF("/shuma-gorath7.stl") as GLTFResult;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+  const { nodes } = useGLTF(`${baseUrl}/shuma-gorath7.stl`) as GLTFResult;
   return (
     <group scale={10} position={[0, -3, 0]} dispose={null}>
       <mesh

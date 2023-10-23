@@ -58,6 +58,8 @@ export default function Headshot({
     [currentScreen, localCurrentScreen, setCurrentScreen]
   );
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; // You can define NEXT_PUBLIC_BASE_URL in your environment variables or as a constant
+
   return (
     !transitionEnd && (
       <div
@@ -66,9 +68,10 @@ export default function Headshot({
       >
         <div className="flex flex-1 transition-all duration-1000">
           <img
-            src="/Seth-Headshot.jpg"
+          src={`${baseUrl}/Seth-Headshot.jpg`}
             alt="Seth Rhodes Headshot"
             className="w-full h-full object-cover"
+            
           />
         </div>
         <Bio setLocalCurrentScreen={setLocalCurrentScreen} />
