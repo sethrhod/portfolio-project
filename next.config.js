@@ -1,5 +1,5 @@
 module.exports = {
-  output: 'export',
+  // output: 'export',
   images: {
     domains: ["play.google.com", "developer.apple.com"],
     deviceSizes: [320, 640, 768, 1024, 1600],
