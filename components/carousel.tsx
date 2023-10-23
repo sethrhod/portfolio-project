@@ -112,7 +112,7 @@ export default function Carousel({}) {
         }}
       >
         {images.map((image, index) => (
-          <Image
+          <img
             id="img"
             key={index}
             src={image}
