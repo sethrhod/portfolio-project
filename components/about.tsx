@@ -10,7 +10,7 @@ export default function About({
 }) {
   const [transitionEnd, setTransitionEnd] = useState<boolean>(false);
   const [localCurrentScreen, setLocalCurrentScreen] =
-    useState<string>(currentScreen);
+    useState<string>("about");
 
   const ref = useCallback(
     (node: HTMLDivElement) => {
