@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div ref={mainRef} className="justify-center items-center">
+      <div ref={mainRef} className="flex justify-center items-center">
         {screens[currentScreen]}
       </div>
     </Layout>
