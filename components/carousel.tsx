@@ -8,7 +8,7 @@ import {
 } from "react";
 
 export default function Carousel({}) {
-  const baseUrl = "https://sethrhod.github.io/portfolio-project/";
+  const baseUrl = "https://sethrhod.github.io/portfolio-project";
 
   const images: string[] = [
     `${baseUrl}/2.png`,

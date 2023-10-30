@@ -57,7 +57,7 @@ export default function Headshot({
     [currentScreen, localCurrentScreen, setCurrentScreen]
   );
 
-  const baseUrl = "https://sethrhod.github.io/portfolio-project/";
+  const baseUrl = "https://sethrhod.github.io/portfolio-project";
 
   return (
     !transitionEnd && (

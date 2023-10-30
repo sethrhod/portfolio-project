@@ -7,7 +7,7 @@ Files: shuma-gorath.gltf [198.75MB] > shuma-gorath-transformed.glb [5.09MB] (97%
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-const baseUrl = "https://sethrhod.github.io/portfolio-project/";
+const baseUrl = "https://sethrhod.github.io/portfolio-project";
 
 export function Model(props) {
   const { nodes, materials } = useGLTF(
