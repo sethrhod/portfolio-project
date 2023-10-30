@@ -11,7 +11,7 @@ function Loader() {
   return (
     <Html center>
       <h1>Loading...</h1>
-      <img src="/loading.gif" alt="loading" />
+      <img src="/portfolio-project/loading.gif" alt="loading" />
     </Html>
   );
 }
