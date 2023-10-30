@@ -57,8 +57,6 @@ export default function Headshot({
     [currentScreen, localCurrentScreen, setCurrentScreen]
   );
 
-  const baseUrl = "https://sethrhod.github.io/portfolio-project";
-
   return (
     !transitionEnd && (
       <div
@@ -67,7 +65,7 @@ export default function Headshot({
       >
         <div className="flex md:h-full h-1/2 transition-all duration-1000">
           <img
-            src={`${baseUrl}/Seth-Headshot.jpg`}
+            src={`/Seth-Headshot.jpg`}
             alt="Seth Rhodes Headshot"
             className="w-full h-full object-cover"
           />
