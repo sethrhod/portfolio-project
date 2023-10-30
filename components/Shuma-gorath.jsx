@@ -11,7 +11,7 @@ import { useGLTF } from "@react-three/drei";
 
 export function Model(props) {
 
-  const { nodes, materials } = useGLTF("/shuma-gorath-transformed.glb");
+  const { nodes, materials } = useGLTF("/portfolio-project/shuma-gorath-transformed.glb");
 
   return (
     <group {...props} dispose={null}>
@@ -23,4 +23,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("/shuma-gorath-transformed.glb");
+useGLTF.preload("/portfolio-project/shuma-gorath-transformed.glb");
