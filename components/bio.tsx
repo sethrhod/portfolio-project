@@ -13,7 +13,7 @@ export default function Bio({ setLocalCurrentScreen }) {
   };
 
   return (
-    <div className="flex md:h-full h-1/2 justify-center bg-opacity-100 transition-all bg-stone-100">
+    <div className="flex md:h-full h-2/3 justify-center bg-opacity-100 transition-all bg-stone-100">
       <div className="flex flex-col justify-around md:w-3/4">
         <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0">
           <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
