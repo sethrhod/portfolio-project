@@ -6,7 +6,7 @@ export default function Bio({ setLocalCurrentScreen }) {
     const target = e.target as HTMLButtonElement;
     const name = target.name;
     if (name === "resume") {
-      window.open("/portfolio-project/SethRhodesResume_2023.pdf", "_blank");
+      window.open("/portfolio-project/SethRhodesResume_3_14_24.pdf", "_blank");
     } else {
       setLocalCurrentScreen(name);
     }
@@ -18,10 +18,10 @@ export default function Bio({ setLocalCurrentScreen }) {
         <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0">
           <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
           <p className="md:text-2xl text-lg">
-            Dedicated, self-motivated, and self-taught React developer with a
+            Dedicated, self-motivated, and self-taught software developer with a
             unique palette for creative and ergonomic designs. Passionate about
             learning and contributing in collaborative team environments.
-            Seeking to leverage my React skills to add value to projects.
+            Seeking to leverage my development skills to add value to projects.
           </p>
           <div className="flex md:flex-col justify-center font-bold mt-6 md:mt-10 md:text-xl">
             <button
