@@ -6,7 +6,7 @@ export default function Bio({ setLocalCurrentScreen }) {
     const target = e.target as HTMLButtonElement;
     const name = target.name;
     if (name === "resume") {
-      window.open("/portfolio-project/public/SethRhodesResume_Oct_2024.pdf", "_blank");
+      window.open("/portfolio-project/SethRhodesResume_Oct_2024.pdf", "_blank");
     } else {
       setLocalCurrentScreen(name);
     }
