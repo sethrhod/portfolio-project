@@ -1,4 +1,5 @@
 module.exports = {
+  output: 'export',
   // basePath: '/portfolio-project',
   images: {
     remotePatterns: [
