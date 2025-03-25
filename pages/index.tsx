@@ -22,10 +22,10 @@ export default function Home() {
 
       />
     ),
-    about: <About
-      setCurrentScreen={setCurrentScreen}
-      currentScreen={currentScreen}
-     />,
+    // about: <About
+    //   setCurrentScreen={setCurrentScreen}
+    //   currentScreen={currentScreen}
+    //  />,
   };
 
   // useEffect(() => {
