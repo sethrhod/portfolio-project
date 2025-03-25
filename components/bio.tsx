@@ -6,7 +6,7 @@ export default function Bio({ setLocalCurrentScreen }) {
     const target = e.target as HTMLButtonElement;
     const name = target.name;
     if (name === "resume") {
-      window.open("/portfolio-project/SethRhodesResume_Oct_2024.pdf", "_blank");
+      window.open("/portfolio-project/SethRhodesMarch2025CV.pdf", "_blank");
     } else {
       setLocalCurrentScreen(name);
     }
@@ -31,13 +31,13 @@ export default function Bio({ setLocalCurrentScreen }) {
             >
               ATC Conferences App
             </button>
-            <button
+            {/* <button
               name="about"
               onClick={handleClick}
               className="text-black hover:text-sky-800"
             >
               More about me
-            </button>
+            </button> */}
             <button
               name="resume"
               onClick={handleClick}
