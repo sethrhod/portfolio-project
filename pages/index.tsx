@@ -1,32 +1,13 @@
 import Layout from "../components/layout";
 import { useState, useRef, useEffect } from "react";
 import React from "react";
-import ProjectShowcase from "../components/project_showcase";
 import About from "../components/about";
 import Headshot from "../components/headshot";
+import Articles from "../components/articles";
+import Link from "next/link";
 
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
-  const [currentScreen, setCurrentScreen] = useState<string>("bio");
-  const screens = {
-    bio: ( 
-      <Headshot
-        currentScreen={currentScreen}
-        setCurrentScreen={setCurrentScreen}
-      />
-    ),
-    project: (
-      <ProjectShowcase
-        setCurrentScreen={setCurrentScreen}
-        currentScreen={currentScreen}
-
-      />
-    ),
-    // about: <About
-    //   setCurrentScreen={setCurrentScreen}
-    //   currentScreen={currentScreen}
-    //  />,
-  };
 
   // useEffect(() => {
   // if (mainRef.current) {
@@ -56,9 +37,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div ref={mainRef} className="flex justify-center items-center">
-        {screens[currentScreen]}
-      </div>
+      <Headshot/>
     </Layout>
   );
 }

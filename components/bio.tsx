@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
-export default function Bio({ setLocalCurrentScreen }) {
+export default function Bio() {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     const name = target.name;
     if (name === "resume") {
       window.open("/portfolio-project/SethRhodesMarch2025CV.pdf", "_blank");
-    } else {
-      setLocalCurrentScreen(name);
     }
   };
 
@@ -24,27 +23,9 @@ export default function Bio({ setLocalCurrentScreen }) {
             Seeking to leverage my development skills to add value to projects.
           </p>
           <div className="flex md:flex-col justify-center font-bold mt-6 md:mt-10 md:text-xl">
-            <button
-              name="project"
-              onClick={handleClick}
-              className="text-black hover:text-sky-800"
-            >
-              ATC Conferences App
-            </button>
-            {/* <button
-              name="about"
-              onClick={handleClick}
-              className="text-black hover:text-sky-800"
-            >
-              More about me
-            </button> */}
-            <button
-              name="resume"
-              onClick={handleClick}
-              className="text-black hover:text-sky-800"
-            >
-              View my resume
-            </button>
+            <Link href="/mobileapp" className="text-black hover:text-sky-800">ATC Conferences app</Link>
+            <Link href="/blog" className="text-black hover:text-sky-800">Blog</Link>
+            <Link href="/portfolio-project/SethRhodesMarch2025CV.pdf" className="text-black hover:text-sky-800">View my resume</Link>
           </div>
         </div>
         <div className="flex flex-1 flex-row justify-evenly items-center m-2">
