@@ -1,43 +1,38 @@
 import Layout from "../components/layout";
-import { useState, useRef, useEffect } from "react";
 import React from "react";
-import About from "../components/about";
 import Headshot from "../components/headshot";
-import Articles from "../components/articles";
-import Link from "next/link";
+import Plaque from "../components/plaque";
+import MobileAppProjectShowcase from "../components/MobileAppProjectShowcase";
+import Blog from "./blog";
+import { getAllPosts } from "../lib/posts";
+import ContactForm from "../components/contact-form";
 
-export default function Home() {
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  // if (mainRef.current) {
-  //   setScreens(mainRef.current.children.length);
-  // }
-  // window.scrollTo({
-  //   top: (mainRef.current?.children[currentScreen] as HTMLElement)?.offsetTop,
-  //   behavior: "smooth",
-  // });
-  // if (headshotRef.current) {
-  //   headshotRef.current.addEventListener("animationend", () => {
-  //     setTransitionEnd(true);
-  //   });
-  // }
-  // return () => {
-  //   if (headshotRef.current) {
-  //     headshotRef.current.removeEventListener("animationend", () => {
-  //       setTransitionEnd(true);
-  //     });
-  //   }
-  // };
-  // }, [
-  //   currentScreen,
-  //   (mainRef.current?.children[currentScreen] as HTMLElement)?.offsetTop,
-  //   mainRef.current,
-  // ]);
-
+export default function Home({posts}:any) {
   return (
     <Layout>
-      <Headshot/>
+      <div id="headshot" className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out">
+        <Headshot />
+        <Plaque />
+      </div>
+      <div id="mobileapp">
+        <MobileAppProjectShowcase />
+      </div>
+      <div id="blog">
+        <Blog posts={posts} />
+      </div>
+      <div id="contact" className="flex flex-col h-screen overflow-hidden">
+        <ContactForm />
+      </div>
     </Layout>
   );
 }
+
+export async function getStaticProps() {
+  const posts = getAllPosts();
+  return {
+    props: {
+      posts
+    }
+  };
+}
+

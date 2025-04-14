@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import Bio from "./bio";
+import Bio from "./plaque";
 
 export default function Headshot() {
   // const [transitionEnd, setTransitionEnd] = useState<boolean>(false);
@@ -48,18 +48,12 @@ export default function Headshot() {
   // );
 
   return (
-      <div
-        // ref={headshotRef}
-        className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out"
-      >
-        <div className="flex md:h-full h-1/3 transition-all duration-1000">
-          <img
-            src={`/Seth-Headshot.jpg`}
-            alt="Seth Rhodes Headshot"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <Bio />
-      </div>
+    <div className="flex md:h-full h-1/3 transition-all duration-1000">
+    <img
+      src={`/Seth-Headshot.jpg`}
+      alt="Seth Rhodes Headshot"
+      className="w-full h-full object-cover"
+    />
+  </div>
     )
 }
