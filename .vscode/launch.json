@@ -25,21 +25,15 @@
           "path": "${workspaceFolder}"
         }
       ]
-    },
+    }
+  ],
+  "compounds": [
     {
-      "name": "Next.js: debug full stack",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/next",
-      "runtimeArgs": ["--inspect"],
-      "skipFiles": ["<node_internals>/**"],
-      "serverReadyAction": {
-        "action": "debugWithEdge",
-        "killOnServerStop": true,
-        "pattern": "- Local:.+(https?://.+)",
-        "uriFormat": "%s",
-        "webRoot": "${workspaceFolder}"
-      }
+      "name": "Next.js: debug full stack (Compound)",
+      "configurations": [
+        "Next.js: debug server-side",
+        "Next.js: debug client-side (Firefox)"
+      ]
     }
   ]
 }

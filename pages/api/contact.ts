@@ -53,7 +53,7 @@ async function sendMail(data: {
 
         // Setup service.
         const transporter = nodemailer.createTransport({
-          host: "smtp.zoho.com",
+          host: "smtp.zoho.eu",
           secure: true,
           port: 465,
           authMethod: "LOGIN",
