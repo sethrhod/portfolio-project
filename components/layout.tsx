@@ -3,37 +3,28 @@ import Header from "./header";
 
 export default function Layout({
   children,
-  // screens,
-  // setScreens,
-  // currentScreen,
-  // setCurrentScreen,
-  // transitionEnd,
 }: {
   children: React.ReactNode;
-  // screens: number;
-  // setScreens: React.Dispatch<React.SetStateAction<number>>;
-  // currentScreen: number;
-  // setCurrentScreen: React.Dispatch<React.SetStateAction<number>>;
-  // transitionEnd: boolean;
 }) {
 
-
   return (
-    <div className="bg-stone-100">
+    <div className="bg-stone-100"> {/* Optional: Keep outer background */}
       <Head>
         <title>Seth Rhodes</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* this component could be implemented later if more content is added */}
-        {/* <Header
-          screens={screens}
-          setScreens={setScreens}
-          currentScreen={currentScreen}
-          setCurrentScreen={setCurrentScreen}
-          transitionEnd={transitionEnd}
-        /> */}
-        {children}
+        {/* Main flex container for horizontal division */}
+        <div className="flex flex-row min-h-screen items-start">
+          {/* Children container takes 3/4 width */}
+          <div className="w-3/4 bg-gray-100"> {/* Apply background here if needed */}
+            {children}
+          </div>
+          {/* Header container takes 1/4 width */}
+          <div className="w-1/4 sticky top-0"> {/* Added sticky top-0 */}
+            <Header />
+          </div>
+        </div>
       </main>
     </div>
   );

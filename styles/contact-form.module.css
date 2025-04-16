@@ -1,7 +1,6 @@
 .formField {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;
@@ -10,7 +9,7 @@
 }
 
 .submitButton {
-  background-color: #3f51b5;
+  background-color: #55951c;
   color: #fff;
   padding: 12px 20px;
   border: none;
@@ -25,11 +24,12 @@
 }
 
 .container {
-  border: 1px solid #ccc;
+  height: fit-content;
   border-radius: 5px;
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.2);
-  background-color: transparent;
+  background-color: #e2e8f0 ;
   padding: 20px;
+  margin: 20px;
 }
 
 .header {

@@ -4,10 +4,10 @@ import { GetStaticPropsContext } from 'next';
 
 export default function Post({ post }: any) {
   return (
-    <article className="prose mx-auto p-4">
+    <article className="prose mx-auto w-2/3 p-4">
       <h1>{post.title}</h1>
       <p className="text-sm text-gray-500">{post.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      <div className="prose-lg max-[767px]:prose"  dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
     </article>
   );
 }

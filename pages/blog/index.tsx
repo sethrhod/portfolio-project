@@ -9,11 +9,11 @@ export default function Blog({ posts }: any) {
       </div>
       <ul className='basis-2/3 flex flex-row w-full max-w-2xl justify-center'>
         {posts.map((post: any) => (
-          <li key={post.slug} className="m-4 bg-slate-200 p-4 max-h-52 max-w-72 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out w-full">
+          <li key={post.slug} className="m-4 bg-slate-200 p-4 max-h-64 min-w-72 w-72 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <Link href={`/blog/${post.slug}`} className='flex flex-col h-full justify-start'>
               <p className="text-xl">{post.title}</p>
               <p className="text-sm text-gray-600">{post.date}</p>
-              <p>{post.description}</p>
+              <p className='overflow-hidden text-ellipsis'>{post.description}</p>
             </Link>
           </li>
         ))}

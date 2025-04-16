@@ -1,4 +1,3 @@
-import Layout from "../components/layout";
 import React from "react";
 import Headshot from "../components/headshot";
 import Plaque from "../components/plaque";
@@ -9,7 +8,7 @@ import ContactForm from "../components/contact-form";
 
 export default function Home({posts}:any) {
   return (
-    <Layout>
+    <>
       <div id="headshot" className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out">
         <Headshot />
         <Plaque />
@@ -20,10 +19,10 @@ export default function Home({posts}:any) {
       <div id="blog">
         <Blog posts={posts} />
       </div>
-      <div id="contact" className="flex flex-col h-screen overflow-hidden">
+      <div id="contact" className="flex h-screen justify-center items-center overflow-hidden">
         <ContactForm />
       </div>
-    </Layout>
+    </>
   );
 }
 

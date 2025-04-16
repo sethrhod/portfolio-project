@@ -1,55 +1,51 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
-export default function Header({
-  screens,
-  setScreens,
-  currentScreen,
-  setCurrentScreen,
-  transitionEnd,
-}: {
-  screens: number;
-  setScreens: React.Dispatch<React.SetStateAction<number>>;
-  currentScreen: number;
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>;
-  transitionEnd: boolean;
-}) {
-  const radioRef = useRef<HTMLDivElement>(null);
+const navItems = [
+  { id: "home", href: "/", label: "Home" },
+  { id: "mobileapp", href: "/#mobileapp", label: "ATC App" },
+  { id: "blog", href: "/#blog", label: "Blog" },
+  { id: "contact", href: "/#contact", label: "Contact" },
+];
 
-  const ScreenRadio = () => {
-    useEffect(() => {
-      if (radioRef.current) {
-        radioRef.current.classList.replace("opacity-0", "opacity-100");
-      }
-    }, []);
+export default function Header() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
-    const buttons = [];
-
-    for (let i = 0; i < screens; i++) {
-      buttons.push(
-        <div>
-          <input
-            type="radio"
-            name="screen"
-            value={i}
-            checked={currentScreen === i}
-            onChange={(e) => {
-              setCurrentScreen(parseInt(e.target.value));
-            }}
-            className="flex flex-1 w-10 h-6 m-2 transition-all duration-500 ease-in-out transform scale-75 hover:scale-100 cursor-pointer"
-          />
-        </div>
-      );
+  useEffect(() => {
+    // Fade in effect
+    if (headerRef.current) {
+      // Use a slight delay to ensure rendering before transition
+      setTimeout(() => {
+        headerRef.current?.classList.replace("opacity-0", "opacity-100");
+      }, 100);
     }
+  }, []);
 
-    return buttons;
-  };
 
   return (
     <div
-      ref={radioRef}
-      className="flex flex-1 fixed opacity-0 left-0 top-0 w-full h-auto justify-center transition-all duration-500 ease-in-out"
+      ref={headerRef}
+      className="flex h-screen justify-center p-2 bg-white bg-opacity-80 shadow-md opacity-0 transition-opacity duration-1000 ease-in-out" 
     >
-      {screens && transitionEnd && <ScreenRadio />}
+      <nav className="flex flex-col space-y-8 justify-center"> 
+        {navItems.map((item) => (
+          <div key={item.id} 
+            className="group flex items-center space-x-2"
+            onClick={() => setActiveSection(item.id)}
+          >
+            <div className="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200">
+            {activeSection === item.id && <div className="w-4 h-4 rounded-full bg-black group-hover:bg-sky-800 transition-colors duration-200"></div>}
+            </div>
+            <Link
+              href={item.href}
+              className="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200"
+            >
+              {item.label}
+            </Link>
+          </div>
+        ))}
+      </nav>
     </div>
   );
 }
