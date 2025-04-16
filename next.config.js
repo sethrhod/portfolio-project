@@ -1,7 +1,9 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   output: 'export',
-  basePath: '/portfolio-project',
-  assetPrefix: '/portfolio-project/',
+  basePath: isProd ? '/portfolio-project' : '',
+  assetPrefix: isProd ? '/portfolio-project/' : '',
   images: {
     remotePatterns: [
       {
