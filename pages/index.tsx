@@ -2,7 +2,7 @@ import React from "react";
 import Headshot from "../components/headshot";
 import Plaque from "../components/plaque";
 import MobileAppProjectShowcase from "../components/MobileAppProjectShowcase";
-import Blog from "./blog";
+import Blog from "../components/Blog";
 import { getAllPosts } from "../lib/posts";
 import ContactForm from "../components/contact-form";
 
