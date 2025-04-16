@@ -1,0 +1,198 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width" data-next-head=""/><title data-next-head="">Seth Rhodes</title><link rel="icon" href="/favicon.ico" data-next-head=""/><link rel="preload" href="/portfolio-project/_next/static/css/74157e777afbca23.css" as="style"/><link rel="stylesheet" href="/portfolio-project/_next/static/css/74157e777afbca23.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/portfolio-project/_next/static/chunks/polyfills-42372ed130431b0a.js"></script><script src="/portfolio-project/_next/static/chunks/webpack-9b891161023bfff4.js" defer=""></script><script src="/portfolio-project/_next/static/chunks/framework-74c343720dcadebf.js" defer=""></script><script src="/portfolio-project/_next/static/chunks/main-d986cdaae2dbca09.js" defer=""></script><script src="/portfolio-project/_next/static/chunks/pages/_app-9156f255747435a3.js" defer=""></script><script src="/portfolio-project/_next/static/chunks/pages/blog/%5Bslug%5D-c1494d795cb15943.js" defer=""></script><script src="/portfolio-project/_next/static/uARtfhyf-JM8fDIx4Gcsb/_buildManifest.js" defer=""></script><script src="/portfolio-project/_next/static/uARtfhyf-JM8fDIx4Gcsb/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="bg-stone-100"> <main><div class="flex flex-row min-h-screen items-start"><div class="w-3/4 bg-gray-100"> <article class="prose mx-auto w-2/3 p-4"><h1>Oauth2.0 and OpenID in .NET</h1><p class="text-sm text-gray-500">2025-04-11</p><div class="prose-lg max-[767px]:prose"><h1>OAuth2.0 and OpenID in .NET</h1>
+<p><em>By Seth Rhodes</em></p>
+<hr>
+<h2>Who am I?</h2>
+<p>Hey! 👋 I'm a junior developer with experience building web and mobile apps.</p>
+<ul>
+<li>I’ve worked with Python, React, and more recently, C# and .NET.</li>
+<li>I love learning — whether it's something technical, artistic, or cultural.</li>
+<li>My hobbies include learning new languages, training in combat sports, eating pizza, and occasionally reading.</li>
+</ul>
+<hr>
+<h2>The Problem</h2>
+<p>The ASP.NET Core Identity library is powerful, but it can be tricky to set up custom OAuth and OpenID workflows.</p>
+<blockquote>
+<p>Learning the OAuth2.0 standard and the basics of the Identity library will set you up to connect to <em>any</em> OAuth provider out there — whether it has a pre-built library or not.</p>
+</blockquote>
+<hr>
+<h2>What This Covers</h2>
+<ul>
+<li>A quick breakdown of OAuth2.0 and OpenID terms</li>
+<li>Google OAuth2.0 + OpenID using the built-in ASP.NET Core Identity library</li>
+<li>A custom OAuth2.0 workflow (using Google as an example)</li>
+</ul>
+<hr>
+<h2>Time to Define Some Terms</h2>
+<h3>Authentication</h3>
+<p>Verifying someone <em>is who they say they are</em></p>
+<blockquote>
+<p><em>Think of a passport</em>
+<img src="https://images.vexels.com/media/users/3/128400/isolated/lists/c9db2601b0265cecee08dbfd903ef0ab-passport-travel-icon.png" alt="passport" title="passport"></p>
+</blockquote>
+<h3>Authorization</h3>
+<p>Verifying someone <em>has access to a specific resource</em></p>
+<blockquote>
+<p><em>Think of the visa in the passport</em>
+<img src="https://www.basecamphike.com/wp-content/uploads/2020/06/tourist-visa-nepal.png" alt="visa" title="visa"></p>
+</blockquote>
+<h3>OAuth2.0</h3>
+<p>OAuth2.0 is the industry-standard protocol for authorization — letting users grant access without sharing passwords.</p>
+<pre><code class="language-text">+--------+                               +---------------+
+|        |--(A)- Authorization Request ->|   Resource    |
+|        |                               |     Owner     |
+|        |&#x3C;-(B)-- Authorization Grant ---|               |
+|        |                               +---------------+
+|        |
+|        |--(C)-- Authorization Grant -->| Authorization |
+| Client |                               |     Server    |
+|        |&#x3C;-(D)----- Access Token -------|               |
+|        |
+|        |--(E)----- Access Token ------>|    Resource   |
+|        |                               |     Server    |
+|        |&#x3C;-(F)--- Protected Resource ---|               |
++--------+                               +---------------+
+</code></pre>
+<h3>Access Tokens</h3>
+<ul>
+<li>Credentials used to access protected resources</li>
+<li>Represent authorization, scope, and lifespan</li>
+<li>Replace usernames and passwords with a simple, secure token</li>
+<li>May include cryptographic properties depending on the server</li>
+</ul>
+<h3>Refresh Tokens</h3>
+<ul>
+<li>Issued by the auth server</li>
+<li>Used to get new access tokens when old ones expire</li>
+<li>Never sent to resource servers</li>
+<li>Help keep users logged in without asking them to reauthenticate</li>
+</ul>
+<h3>OpenID</h3>
+<p>OpenID is an <em>authentication layer</em> built on top of OAuth2.0.</p>
+<ul>
+<li>Gives a secure, verifiable answer to:
+<blockquote>
+<p>"Who is the person currently using this browser or app?"</p>
+</blockquote>
+</li>
+<li>Developers love it because it:
+<ul>
+<li>Removes the need to store or manage passwords</li>
+<li>Reduces risk of credential-based data breaches</li>
+<li>Works great across platforms (web, mobile, etc.)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Identity in ASP.NET Core</h2>
+<p>⚠️ We're using Identity <em>in</em> ASP.NET Core,<br>
+but <strong>not ASP.NET Identity</strong> and <strong>not the Microsoft Identity Platform</strong>.</p>
+<hr>
+<h2>Google External Login with ASP.NET Core</h2>
+<h3>1. Create the Project</h3>
+<pre><code class="language-bash">dotnet new webapp -o GoogleOAuthDemo --auth Individual
+</code></pre>
+<hr>
+<h3>2. Register the App with Google</h3>
+<ol>
+<li>Go to <a href="https://console.developers.google.com">Google Cloud Console</a></li>
+<li>Create a new project</li>
+<li>Go to <strong>OAuth Consent Screen</strong> → fill in app details</li>
+<li>Create an <strong>OAuth 2.0 Client ID</strong>
+<ul>
+<li>Application type: <strong>Web</strong></li>
+<li>Redirect URI:
+<pre><code>https://localhost:7182/signin-google
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>What is <code>/signin-google</code>?</strong><br>
+It’s the default callback path used by the Google OAuth middleware in ASP.NET Core.</p>
+<hr>
+<h3>3. Add the Google Login NuGet Package</h3>
+<pre><code class="language-bash">dotnet add package Microsoft.AspNetCore.Authentication.Google
+</code></pre>
+<hr>
+<h3>4. Add Google Auth in <code>Program.cs</code></h3>
+<pre><code class="language-csharp">builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = config["Authentication:Google:ClientId"];
+        options.ClientSecret = config["Authentication:Google:ClientSecret"];
+    });
+</code></pre>
+<hr>
+<h3>5. Add Config to <code>appsettings.json</code> (or User Secrets)</h3>
+<pre><code class="language-json">"Authentication": {
+  "Google": {
+    "ClientId": "your-client-id",
+    "ClientSecret": "your-client-secret"
+  }
+}
+</code></pre>
+<hr>
+<h3>6. Test It</h3>
+<p>Run the app and click “Login with Google.” You’re in.</p>
+<hr>
+<h2>Custom OAuth Flow (Still Using Google for the Demo)</h2>
+<p>Let’s say your provider <em>doesn't</em> have a premade library. You can still make it work with <code>.AddOAuth()</code>.</p>
+<hr>
+<h3>1. Register with the Third-Party Provider</h3>
+<p>Same as before — we’ll continue using Google for this example.</p>
+<hr>
+<h3>2. Add a Custom OAuth Provider in <code>Program.cs</code></h3>
+<pre><code class="language-csharp">builder.Services.AddAuthentication()
+    .AddOAuth("Google", options =>
+    {
+        options.ClientId = "...";
+        options.ClientSecret = "...";
+        options.CallbackPath = "/signin-google";
+
+        options.AuthorizationEndpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+        options.TokenEndpoint = "https://oauth2.googleapis.com/token";
+        options.UserInformationEndpoint = "https://openidconnect.googleapis.com/v1/userinfo";
+
+        options.Scope.Add("openid");
+        options.Scope.Add("profile");
+        options.Scope.Add("email");
+
+        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "sub");
+        options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
+        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+
+        options.Events = new OAuthEvents
+        {
+            OnCreatingTicket = async context =>
+            {
+                var idToken = context.TokenResponse.Response?.RootElement.GetString("id_token");
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(idToken);
+
+                foreach (var claim in token.Claims)
+                {
+                    context.Identity?.AddClaim(claim);
+                }
+            }
+        };
+    });
+</code></pre>
+<p>This pattern works not only for Google, but for <strong>any</strong> standards-compliant OAuth2/OpenID provider.</p>
+<hr>
+<h3>3. Test</h3>
+<p>Run the app and login. Same Google sign-in — but now <strong>you built the OAuth flow yourself.</strong></p>
+<hr>
+<h2>References</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-9.0">Intro to Identity on ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-9.0">Google External Login in ASP.NET Core</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/additional-claims?view=aspnetcore-9.0">Add Claims and Tokens from External Providers</a></li>
+<li><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">ASP.NET Core Authentication Overview</a></li>
+<li><a href="https://oauth.net/2/">OAuth2.0 Explained</a></li>
+</ul>
+<hr>
+<h2>Final Thoughts</h2>
+<p>OAuth2.0 and OpenID might sound intimidating at first — but once you understand the flow and build a working example, you’re set for almost any modern app.</p>
+<p>Whether you're using a prebuilt library or setting up a custom provider, this knowledge gives you the flexibility to integrate secure, standards-based login with confidence.</p>
+<hr>
+</div></article></div><div class="w-1/4 sticky top-0"> <div class="flex h-screen justify-center p-2 bg-white bg-opacity-80 shadow-md opacity-0 transition-opacity duration-1000 ease-in-out"><nav class="flex flex-col space-y-8 justify-center"><div class="group flex items-center space-x-2"><div class="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200"></div><a class="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200" href="/portfolio-project">Home</a></div><div class="group flex items-center space-x-2"><div class="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200"></div><a class="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200" href="/portfolio-project#mobileapp">ATC App</a></div><div class="group flex items-center space-x-2"><div class="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200"></div><a class="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200" href="/portfolio-project#blog">Blog</a></div><div class="group flex items-center space-x-2"><div class="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200"></div><a class="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200" href="/portfolio-project#contact">Contact</a></div></nav></div></div></div></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"slug":"OauthPresentation","contentHtml":"\u003ch1\u003eOAuth2.0 and OpenID in .NET\u003c/h1\u003e\n\u003cp\u003e\u003cem\u003eBy Seth Rhodes\u003c/em\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003ch2\u003eWho am I?\u003c/h2\u003e\n\u003cp\u003eHey! 👋 I'm a junior developer with experience building web and mobile apps.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eI’ve worked with Python, React, and more recently, C# and .NET.\u003c/li\u003e\n\u003cli\u003eI love learning — whether it's something technical, artistic, or cultural.\u003c/li\u003e\n\u003cli\u003eMy hobbies include learning new languages, training in combat sports, eating pizza, and occasionally reading.\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch2\u003eThe Problem\u003c/h2\u003e\n\u003cp\u003eThe ASP.NET Core Identity library is powerful, but it can be tricky to set up custom OAuth and OpenID workflows.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eLearning the OAuth2.0 standard and the basics of the Identity library will set you up to connect to \u003cem\u003eany\u003c/em\u003e OAuth provider out there — whether it has a pre-built library or not.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003chr\u003e\n\u003ch2\u003eWhat This Covers\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eA quick breakdown of OAuth2.0 and OpenID terms\u003c/li\u003e\n\u003cli\u003eGoogle OAuth2.0 + OpenID using the built-in ASP.NET Core Identity library\u003c/li\u003e\n\u003cli\u003eA custom OAuth2.0 workflow (using Google as an example)\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch2\u003eTime to Define Some Terms\u003c/h2\u003e\n\u003ch3\u003eAuthentication\u003c/h3\u003e\n\u003cp\u003eVerifying someone \u003cem\u003eis who they say they are\u003c/em\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cem\u003eThink of a passport\u003c/em\u003e\r\n\u003cimg src=\"https://images.vexels.com/media/users/3/128400/isolated/lists/c9db2601b0265cecee08dbfd903ef0ab-passport-travel-icon.png\" alt=\"passport\" title=\"passport\"\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3\u003eAuthorization\u003c/h3\u003e\n\u003cp\u003eVerifying someone \u003cem\u003ehas access to a specific resource\u003c/em\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cem\u003eThink of the visa in the passport\u003c/em\u003e\r\n\u003cimg src=\"https://www.basecamphike.com/wp-content/uploads/2020/06/tourist-visa-nepal.png\" alt=\"visa\" title=\"visa\"\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3\u003eOAuth2.0\u003c/h3\u003e\n\u003cp\u003eOAuth2.0 is the industry-standard protocol for authorization — letting users grant access without sharing passwords.\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003e+--------+                               +---------------+\r\n|        |--(A)- Authorization Request -\u003e|   Resource    |\r\n|        |                               |     Owner     |\r\n|        |\u0026#x3C;-(B)-- Authorization Grant ---|               |\r\n|        |                               +---------------+\r\n|        |\r\n|        |--(C)-- Authorization Grant --\u003e| Authorization |\r\n| Client |                               |     Server    |\r\n|        |\u0026#x3C;-(D)----- Access Token -------|               |\r\n|        |\r\n|        |--(E)----- Access Token ------\u003e|    Resource   |\r\n|        |                               |     Server    |\r\n|        |\u0026#x3C;-(F)--- Protected Resource ---|               |\r\n+--------+                               +---------------+\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003eAccess Tokens\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eCredentials used to access protected resources\u003c/li\u003e\n\u003cli\u003eRepresent authorization, scope, and lifespan\u003c/li\u003e\n\u003cli\u003eReplace usernames and passwords with a simple, secure token\u003c/li\u003e\n\u003cli\u003eMay include cryptographic properties depending on the server\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003eRefresh Tokens\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eIssued by the auth server\u003c/li\u003e\n\u003cli\u003eUsed to get new access tokens when old ones expire\u003c/li\u003e\n\u003cli\u003eNever sent to resource servers\u003c/li\u003e\n\u003cli\u003eHelp keep users logged in without asking them to reauthenticate\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003eOpenID\u003c/h3\u003e\n\u003cp\u003eOpenID is an \u003cem\u003eauthentication layer\u003c/em\u003e built on top of OAuth2.0.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGives a secure, verifiable answer to:\n\u003cblockquote\u003e\n\u003cp\u003e\"Who is the person currently using this browser or app?\"\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c/li\u003e\n\u003cli\u003eDevelopers love it because it:\n\u003cul\u003e\n\u003cli\u003eRemoves the need to store or manage passwords\u003c/li\u003e\n\u003cli\u003eReduces risk of credential-based data breaches\u003c/li\u003e\n\u003cli\u003eWorks great across platforms (web, mobile, etc.)\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch2\u003eIdentity in ASP.NET Core\u003c/h2\u003e\n\u003cp\u003e⚠️ We're using Identity \u003cem\u003ein\u003c/em\u003e ASP.NET Core,\u003cbr\u003e\nbut \u003cstrong\u003enot ASP.NET Identity\u003c/strong\u003e and \u003cstrong\u003enot the Microsoft Identity Platform\u003c/strong\u003e.\u003c/p\u003e\n\u003chr\u003e\n\u003ch2\u003eGoogle External Login with ASP.NET Core\u003c/h2\u003e\n\u003ch3\u003e1. Create the Project\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edotnet new webapp -o GoogleOAuthDemo --auth Individual\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e2. Register the App with Google\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003eGo to \u003ca href=\"https://console.developers.google.com\"\u003eGoogle Cloud Console\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eCreate a new project\u003c/li\u003e\n\u003cli\u003eGo to \u003cstrong\u003eOAuth Consent Screen\u003c/strong\u003e → fill in app details\u003c/li\u003e\n\u003cli\u003eCreate an \u003cstrong\u003eOAuth 2.0 Client ID\u003c/strong\u003e\n\u003cul\u003e\n\u003cli\u003eApplication type: \u003cstrong\u003eWeb\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eRedirect URI:\n\u003cpre\u003e\u003ccode\u003ehttps://localhost:7182/signin-google\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cstrong\u003eWhat is \u003ccode\u003e/signin-google\u003c/code\u003e?\u003c/strong\u003e\u003cbr\u003e\nIt’s the default callback path used by the Google OAuth middleware in ASP.NET Core.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e3. Add the Google Login NuGet Package\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003edotnet add package Microsoft.AspNetCore.Authentication.Google\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e4. Add Google Auth in \u003ccode\u003eProgram.cs\u003c/code\u003e\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-csharp\"\u003ebuilder.Services.AddAuthentication()\r\n    .AddGoogle(options =\u003e\r\n    {\r\n        options.ClientId = config[\"Authentication:Google:ClientId\"];\r\n        options.ClientSecret = config[\"Authentication:Google:ClientSecret\"];\r\n    });\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e5. Add Config to \u003ccode\u003eappsettings.json\u003c/code\u003e (or User Secrets)\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e\"Authentication\": {\r\n  \"Google\": {\r\n    \"ClientId\": \"your-client-id\",\r\n    \"ClientSecret\": \"your-client-secret\"\r\n  }\r\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003chr\u003e\n\u003ch3\u003e6. Test It\u003c/h3\u003e\n\u003cp\u003eRun the app and click “Login with Google.” You’re in.\u003c/p\u003e\n\u003chr\u003e\n\u003ch2\u003eCustom OAuth Flow (Still Using Google for the Demo)\u003c/h2\u003e\n\u003cp\u003eLet’s say your provider \u003cem\u003edoesn't\u003c/em\u003e have a premade library. You can still make it work with \u003ccode\u003e.AddOAuth()\u003c/code\u003e.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e1. Register with the Third-Party Provider\u003c/h3\u003e\n\u003cp\u003eSame as before — we’ll continue using Google for this example.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e2. Add a Custom OAuth Provider in \u003ccode\u003eProgram.cs\u003c/code\u003e\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-csharp\"\u003ebuilder.Services.AddAuthentication()\r\n    .AddOAuth(\"Google\", options =\u003e\r\n    {\r\n        options.ClientId = \"...\";\r\n        options.ClientSecret = \"...\";\r\n        options.CallbackPath = \"/signin-google\";\r\n\r\n        options.AuthorizationEndpoint = \"https://accounts.google.com/o/oauth2/v2/auth\";\r\n        options.TokenEndpoint = \"https://oauth2.googleapis.com/token\";\r\n        options.UserInformationEndpoint = \"https://openidconnect.googleapis.com/v1/userinfo\";\r\n\r\n        options.Scope.Add(\"openid\");\r\n        options.Scope.Add(\"profile\");\r\n        options.Scope.Add(\"email\");\r\n\r\n        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, \"sub\");\r\n        options.ClaimActions.MapJsonKey(ClaimTypes.Name, \"name\");\r\n        options.ClaimActions.MapJsonKey(ClaimTypes.Email, \"email\");\r\n\r\n        options.Events = new OAuthEvents\r\n        {\r\n            OnCreatingTicket = async context =\u003e\r\n            {\r\n                var idToken = context.TokenResponse.Response?.RootElement.GetString(\"id_token\");\r\n                var handler = new JwtSecurityTokenHandler();\r\n                var token = handler.ReadJwtToken(idToken);\r\n\r\n                foreach (var claim in token.Claims)\r\n                {\r\n                    context.Identity?.AddClaim(claim);\r\n                }\r\n            }\r\n        };\r\n    });\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThis pattern works not only for Google, but for \u003cstrong\u003eany\u003c/strong\u003e standards-compliant OAuth2/OpenID provider.\u003c/p\u003e\n\u003chr\u003e\n\u003ch3\u003e3. Test\u003c/h3\u003e\n\u003cp\u003eRun the app and login. Same Google sign-in — but now \u003cstrong\u003eyou built the OAuth flow yourself.\u003c/strong\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003ch2\u003eReferences\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-9.0\"\u003eIntro to Identity on ASP.NET Core\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-9.0\"\u003eGoogle External Login in ASP.NET Core\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/additional-claims?view=aspnetcore-9.0\"\u003eAdd Claims and Tokens from External Providers\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://learn.microsoft.com/en-us/aspnet/core/security/authentication/\"\u003eASP.NET Core Authentication Overview\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://oauth.net/2/\"\u003eOAuth2.0 Explained\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003ch2\u003eFinal Thoughts\u003c/h2\u003e\n\u003cp\u003eOAuth2.0 and OpenID might sound intimidating at first — but once you understand the flow and build a working example, you’re set for almost any modern app.\u003c/p\u003e\n\u003cp\u003eWhether you're using a prebuilt library or setting up a custom provider, this knowledge gives you the flexibility to integrate secure, standards-based login with confidence.\u003c/p\u003e\n\u003chr\u003e\n","title":"Oauth2.0 and OpenID in .NET","date":"2025-04-11","description":"This is a presentation on OAuth2.0 and OpenID integration in .NET. Specifically with ASP.NET Core Identity and the Google Oauth2.0 provider."}},"__N_SSG":true},"page":"/blog/[slug]","query":{"slug":"OauthPresentation"},"buildId":"uARtfhyf-JM8fDIx4Gcsb","assetPrefix":"/portfolio-project","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
