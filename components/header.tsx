@@ -32,15 +32,15 @@ export default function Header() {
         {navItems.map((item) => (
           <div key={item.id} 
             className="group flex items-center space-x-2"
-            onClick={() => setActiveSection(item.id)}
           >
-            <div className="w-8 h-8 rounded-full border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200">
-            {activeSection === item.id && <div className="w-4 h-4 rounded-full bg-black group-hover:bg-sky-800 transition-colors duration-200"></div>}
-            </div>
             <Link
               href={item.href}
-              className="text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200"
+              className="flex flex-row text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200"
+              onClick={() => setActiveSection(item.id)}
             >
+              <div className="w-8 h-8 rounded-full mr-2 border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200">
+                {activeSection === item.id && <div className="w-4 h-4 rounded-full bg-black group-hover:bg-sky-800 transition-colors duration-200"></div>}
+              </div>
               {item.label}
             </Link>
           </div>
