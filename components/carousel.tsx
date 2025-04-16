@@ -6,22 +6,22 @@ import {
   useRef,
   useState,
 } from "react";
+import { prefix } from "../lib/prefix";
 
 export default function Carousel({}) {
-  // const baseUrl = "/portfolio-project";
 
   const images: string[] = [
-    `/2.png`,
-    `/1.png`,
-    `/3.png`,
-    `/6.png`,
-    `/4.png`,
-    `/5.png`,
-    `/2.png`,
-    `/1.png`,
-    `/3.png`,
-    `/6.png`,
-    `/4.png`,
+    `${prefix}/2.png`,
+    `${prefix}/1.png`,
+    `${prefix}/3.png`,
+    `${prefix}/6.png`,
+    `${prefix}/4.png`,
+    `${prefix}/5.png`,
+    `${prefix}/2.png`,
+    `${prefix}/1.png`,
+    `${prefix}/3.png`,
+    `${prefix}/6.png`,
+    `${prefix}/4.png`,
   ];
 
   //if screen is mobile set perView to 1

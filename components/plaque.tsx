@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
+import { prefix } from "../lib/prefix";
 
 export default function Plaque() {
   return (
@@ -15,7 +16,7 @@ export default function Plaque() {
             Seeking to leverage my development skills to add value to projects.
           </p>
           <div className="flex md:flex-col justify-center font-bold mt-6 md:mt-10 md:text-xl">
-            <Link href="/SethRhodesMarch2025CV.pdf" target="_blank" className="text-black hover:text-sky-800">View my resume</Link>
+            <Link href={`${prefix}/SethRhodesMarch2025CV.pdf`} target="_blank" className="text-black hover:text-sky-800">View my resume</Link>
           </div>
         </div>
         <div className="flex flex-1 flex-row justify-evenly items-center m-2">
