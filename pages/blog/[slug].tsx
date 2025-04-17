@@ -4,7 +4,7 @@ import { GetStaticPropsContext } from 'next';
 
 export default function Post({ post }: { post: Post }) {
   return (
-    <article className="prose mx-auto mt-14 md:w-2/3 p-4">
+    <article className="prose mx-auto mt-14 md:mt-0 md:w-2/3 p-4">
       <h1>{post.title}</h1>
       <p className="text-sm text-gray-500">by: {post.author}</p>
       <p className="text-sm text-gray-500">{post.date}</p>
