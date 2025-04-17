@@ -4,19 +4,15 @@ import Link from "next/link";
 
 export default function AboutMe() {
   return (
-    <div className="flex flex-col h-full items-center mt-14 mr-6 ml-6 md:mt-0 md:mr-0 md:ml-0">
+    <div className="flex flex-col h-full items-center mt-14 mr-6 ml-6 md:mt-20 md:mx-20">
       <div className="flex basis-2/3 flex-col mb-4 mt-4">
-        <span className="font-bold text-2xl">About Me</span>
-        <p className="md:text-2xl text-lg">
-          <br/>
+        <span className="font-bold text-3xl self-center mb-10">About Me</span>
+        <p className="text-center text-xl md:text-2xl">
           <strong>Hey!</strong>👋 I'm a junior developer with experience building <strong>web</strong> and <strong>mobile</strong> apps.
-          <br/>
           <br/>
           I’ve worked with <strong>Python</strong>, <strong>React</strong>, and more recently, <strong>C#</strong> and <strong>.NET</strong>.
           <br/>
-          <br/>
           I love learning — whether it's something technical, artistic, or cultural.
-          <br/>
           <br/>
           My hobbies include learning new languages, training in combat sports, eating pizza, and occasionally reading.
         </p>

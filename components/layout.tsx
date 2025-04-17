@@ -15,7 +15,7 @@ export default function Layout({
       </Head>
       <main>
           <Header />
-          <div>
+          <div className="md:w-4/5">
             {children}
           </div>
       </main>

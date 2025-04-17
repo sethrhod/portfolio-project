@@ -4,8 +4,8 @@ import { faArrowDown, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function Plaque() {
   return (
-    <div className="flex md:h-full h-2/4 flex-col justify-center items-center overflow-hidden">
-      <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0">
+    <div className="flex md:h-full h-2/3 flex-col justify-center items-center overflow-hidden">
+      <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0 md:p-12">
         <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
         <p className="md:text-2xl text-lg">
           Dedicated, self-motivated, and self-taught software developer with a

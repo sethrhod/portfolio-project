@@ -8,7 +8,7 @@ import {
 } from "react";
 import { prefix } from "../lib/prefix";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function Carousel({}) {
 
@@ -31,7 +31,7 @@ export default function Carousel({}) {
 
   function getPerView(): number {
     if (typeof window !== "undefined") {
-      return window.innerWidth < 768 ? 1 : 4;
+      return window.innerWidth < 768 ? 2.25 : 4;
     }
   }
 
@@ -104,11 +104,11 @@ export default function Carousel({}) {
   }, [SliderRef.current, perView]);
 
   return (
-    <div className="flex flex-1 transition-all items-center justify-center">
+    <div className="flex transition-all items-center justify-center">
       <div
         id="slider"
         ref={SliderRef}
-        className="grid grid-flow-col gap-4 overflow-x-scroll scrollbar-hide"
+        className="grid grid-flow-col gap-4 overflow-x-scroll"
         style={{
           gridAutoColumns:
             "calc((100% - (1.5rem * (var(--per-view) - 1))) / var(--per-view))",
@@ -121,20 +121,10 @@ export default function Carousel({}) {
             src={image}
             data-index={index}
             alt="Project Screenshot"
-            width={300}
-            height={300}
             className="inline-block transition-transform duration-500 ease-out"
           />
         ))}
       </div>
-      <FontAwesomeIcon icon={faChevronRight} size="3x" className="absolute right-2 hover:text-sky-800"
-        onClick={() => {
-          if (SliderRef.current !== null) {
-            SliderRef.current.scrollLeft +=
-              SliderRef.current.offsetWidth - 100;
-          }
-        }}
-      />
     </div>
   );
 }

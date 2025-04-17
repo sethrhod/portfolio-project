@@ -3,11 +3,11 @@ import Carousel from "./carousel";
 export default function MobileAppProjectShowcase() {
   return (
       <div
-        className="flex flex-1 h-screen flex-col justify-between transition-all duration-1000 ease-in-out"
+        className="flex h-screen flex-col justify-center space-y-5 transition-all duration-1000 ease-in-out"
       >
         <Carousel />
-        <div className="flex flex-col md:flex-row p-4">
-          <div className="flex flex-[3] flex-col m-2">
+        <div className="flex flex-col p-4">
+          <div className="flex flex-col m-2">
             <h2 className="text-2xl mb-1 text-left font-bold">
               ATC conferences App
             </h2>

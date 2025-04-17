@@ -14,7 +14,7 @@ export default function Home({posts}:any) {
         <Headshot />
         <Plaque />
       </div>
-      <div id="aboutme" className="flex h-screen items-start overflow-hidden">
+      <div id="aboutme" className="flex h-screen items-start">
         <AboutMe />
       </div>
       <div id="mobileapp">
