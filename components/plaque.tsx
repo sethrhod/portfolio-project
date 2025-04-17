@@ -1,41 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
-import { prefix } from "../lib/prefix";
+import { faArrowDown, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function Plaque() {
   return (
-    <div className="flex md:h-full h-2/3 justify-center bg-opacity-100 transition-all bg-stone-100">
-      <div className="flex flex-col justify-around md:w-3/4">
-        <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0">
-          <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
-          <p className="md:text-2xl text-lg">
-            Dedicated, self-motivated, and self-taught software developer with a
-            unique palette for creative and ergonomic designs. Passionate about
-            learning and contributing in collaborative team environments.
-            Seeking to leverage my development skills to add value to projects.
-          </p>
-          <div className="flex md:flex-col justify-center font-bold mt-6 md:mt-10 md:text-xl">
-            <Link href={`/SethRhodesMarch2025CV.pdf`} target="_blank" className="text-black hover:text-sky-800">View my resume</Link>
-          </div>
-        </div>
-        <div className="flex flex-1 flex-row justify-evenly items-center m-2">
-          <a href="https://github.com/sethrhod">
-            <FontAwesomeIcon
-              icon={faGithub}
-              size="5x"
-              className="hover:text-sky-800"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/seth-rhodes-80375a238/">
-            <FontAwesomeIcon
-              icon={faLinkedinIn}
-              size="5x"
-              className="hover:text-sky-800"
-            />
-          </a>
-        </div>
+    <div className="flex md:h-full h-2/4 flex-col justify-center items-center overflow-hidden">
+      <div className="flex flex-[2] justify-center flex-col mr-6 ml-6 md:mr-0 md:ml-0">
+        <h1 className="md:text-6xl text-5xl mb-4 mt-4">Seth Rhodes</h1>
+        <p className="md:text-2xl text-lg">
+          Dedicated, self-motivated, and self-taught software developer with a
+          unique palette for creative and ergonomic designs. Passionate about
+          learning and contributing in collaborative team environments.
+          Seeking to leverage my development skills to add value to projects.
+        </p>
       </div>
+      <Link href={'/#aboutme'} className="flex flex-1 flex-col text-lg font-medium justify-center items-center">
+        More about me
+        <FontAwesomeIcon icon={faChevronDown} size="1x" className="hover:text-sky-800" />
+      </Link>
     </div>
   );
 }

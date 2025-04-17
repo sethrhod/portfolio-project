@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 import { prefix } from "../lib/prefix";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function Carousel({}) {
 
@@ -125,6 +127,14 @@ export default function Carousel({}) {
           />
         ))}
       </div>
+      <FontAwesomeIcon icon={faChevronRight} size="3x" className="absolute right-2 hover:text-sky-800"
+        onClick={() => {
+          if (SliderRef.current !== null) {
+            SliderRef.current.scrollLeft +=
+              SliderRef.current.offsetWidth - 100;
+          }
+        }}
+      />
     </div>
   );
 }

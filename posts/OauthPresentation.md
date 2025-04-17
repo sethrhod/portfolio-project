@@ -1,22 +1,8 @@
 ---
 title: "Oauth2.0 and OpenID in .NET"
-date: "2025-04-11"
+date: "04-11-2025"
+author: "Seth Rhodes"
 description: "This is a presentation on OAuth2.0 and OpenID integration in .NET. Specifically with ASP.NET Core Identity and the Google Oauth2.0 provider."
----
-
-# OAuth2.0 and OpenID in .NET  
-*By Seth Rhodes*
-
----
-
-## Who am I?
-
-Hey! 👋 I'm a junior developer with experience building web and mobile apps.
-
-- I’ve worked with Python, React, and more recently, C# and .NET.
-- I love learning — whether it's something technical, artistic, or cultural.
-- My hobbies include learning new languages, training in combat sports, eating pizza, and occasionally reading.
-
 ---
 
 ## The Problem

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const navItems = [
   { id: "home", href: "/", label: "Home" },
+  { id: "aboutme", href: "/#aboutme", label: "About Me" },
   { id: "mobileapp", href: "/#mobileapp", label: "ATC App" },
   { id: "blog", href: "/#blog", label: "Blog" },
   { id: "contact", href: "/#contact", label: "Contact" },
@@ -26,19 +27,19 @@ export default function Header() {
   return (
     <div
       ref={headerRef}
-      className="flex h-screen justify-center p-2 bg-white bg-opacity-80 shadow-md opacity-0 transition-opacity duration-1000 ease-in-out" 
+      className="fixed top-0 left-0 w-full h-14 md:h-screen bg-white bg-opacity-80 shadow-md z-50 transition-opacity duration-1000 ease-in-out" 
     >
-      <nav className="flex flex-col space-y-8 justify-center"> 
+      <nav className="flex h-full justify-evenly md:justify-center items-center md:space-y-8"> 
         {navItems.map((item) => (
           <div key={item.id} 
-            className="group flex items-center space-x-2"
+            className="group"
           >
             <Link
               href={item.href}
-              className="flex flex-row text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200"
+              className="flex text-lg md:text-xl font-semibold group-hover:text-sky-800 transition-colors duration-200"
               onClick={() => setActiveSection(item.id)}
             >
-              <div className="w-8 h-8 rounded-full mr-2 border-2 border-black bg-transparent flex items-center justify-center group-hover:border-sky-800 transition-colors duration-200">
+              <div className="hidden md:flex w-8 h-8 rounded-full mr-2 border-2 border-black bg-transparent items-center justify-center group-hover:border-sky-800 transition-colors duration-200">
                 {activeSection === item.id && <div className="w-4 h-4 rounded-full bg-black group-hover:bg-sky-800 transition-colors duration-200"></div>}
               </div>
               {item.label}
