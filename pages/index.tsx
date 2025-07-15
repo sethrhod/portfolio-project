@@ -11,7 +11,7 @@ export default function Home({posts}:any) {
   return (
     <>
       <div id="headshot" className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out">
-        <Headshot />
+        {/* <Headshot /> */}
         <Plaque />
       </div>
       <div id="aboutme" className="flex h-screen items-start">
