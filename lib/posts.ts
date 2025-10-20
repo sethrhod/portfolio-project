@@ -18,7 +18,7 @@ export async function getPost(slug: string) {
   return {
     slug,
     contentHtml,
-    ...(data as { title: string; date: string; description: string })
+    ...(data as { title: string; date: string; author: string; description: string })
   };
 }
 
@@ -33,7 +33,7 @@ export function getAllPosts() {
 
     return {
       slug,
-      ...(data as { title: string; date: string; description: string })
+      ...(data as { title: string; date: string; author: string; description: string })
     };
   });
 }

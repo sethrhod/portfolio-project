@@ -8,17 +8,17 @@ export default function AboutMe() {
       <div className="flex basis-2/3 flex-col mb-4 mt-4">
         <span className="font-bold text-3xl self-center mb-10">About Me</span>
         <p className="text-center text-xl md:text-2xl">
-          <strong>Hey!</strong>👋 I'm a junior developer with experience building <strong>web</strong> and <strong>mobile</strong> apps.
+          <strong>Hey!</strong>👋 I'm a Fullstack developer with experience building <strong>web</strong> and <strong>mobile</strong> apps.
           <br/>
-          I’ve worked with <strong>Python</strong>, <strong>React</strong>, and more recently, <strong>C#</strong> and <strong>.NET</strong>.
+          I’ve worked with <strong>Python</strong>, <strong>Next.js</strong>, <strong>C#</strong> and <strong>.NET</strong>.
           <br/>
-          I love learning — whether it's something technical, artistic, or cultural.
+          I love learning — whether it's about something technical, artistic, design oriented, or just something interesting.
           <br/>
-          My hobbies include learning new languages, training in combat sports, eating pizza, and occasionally reading.
+          Most of my time is spent learning new languages, training in combat sports, eating pizza, reading, andd improving my skillset as a developer.
         </p>
         </div>
         <div className="flex basis-2/3 w-full flex-col items-center mb-4 mt-4">
-          <Link href={`/SethRhodesMarch2025CV.pdf`}
+          <Link href={`/SethRhodesCV.pdf`}
           target="_blank"
           className="font-bold text-xl m-6 mb-12 hover:text-sky-800"
         >

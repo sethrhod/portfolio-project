@@ -1,9 +1,6 @@
-const isProd = process.env.NODE_ENV === 'production';
-
 module.exports = {
-  output: 'export',
-  basePath: isProd ? '/portfolio-project' : '',
-  assetPrefix: isProd ? '/portfolio-project/' : '',
+  // Enable standalone output for Docker deployment
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

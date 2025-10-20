@@ -8,14 +8,14 @@ export default function Layout({
 }) {
 
   return (
-    <div className="bg-stone-100">
+    <div className="bg-stone-100 w-full overflow-x-hidden">
       <Head>
         <title>Seth Rhodes</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className="w-full pt-16 md:pt-0 md:pr-[20%]">
           <Header />
-          <div className="md:w-4/5">
+          <div className="w-full">
             {children}
           </div>
       </main>

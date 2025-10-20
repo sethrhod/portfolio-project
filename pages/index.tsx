@@ -9,24 +9,24 @@ import AboutMe from "../components/aboutme";
 
 export default function Home({posts}:any) {
   return (
-    <>
-      <div id="headshot" className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out">
+    <div className="w-full overflow-x-hidden">
+      <div id="headshot" className="flex flex-col h-screen overflow-hidden md:flex-row transition-all duration-500 ease-in-out w-full">
         {/* <Headshot /> */}
         <Plaque />
       </div>
-      <div id="aboutme" className="flex h-screen items-start">
+      <div id="aboutme" className="flex h-screen items-start w-full">
         <AboutMe />
       </div>
-      <div id="mobileapp">
+      <div id="mobileapp" className="w-full">
         <MobileAppProjectShowcase />
       </div>
-      <div id="blog">
+      <div id="blog" className="w-full">
         <Blog posts={posts} />
       </div>
-      <div id="contact" className="flex h-screen justify-center items-center overflow-hidden">
+      <div id="contact" className="flex h-screen justify-center items-center overflow-hidden w-full">
         <ContactForm />
       </div>
-    </>
+    </div>
   );
 }
 

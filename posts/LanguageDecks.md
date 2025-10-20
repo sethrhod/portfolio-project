@@ -1,14 +1,22 @@
-# How I Built LanguageDecks.com: Integrating OpenAI with Next.js and .NET
+---
+title: "How I Built LanguageDecks.com: Integrating OpenAI with Next.js and .NET"
+date: "10-17-2025"
+author: "Seth Rhodes"
+description: "A deep dive into the architecture, challenges, and solutions behind LanguageDecks.com, a LLM-powered language learning flashcard generator."
+---
+
+## I. Introduction
 
 This blog post highlights the the complexities and simplicities of creating a GPT-wrapper app, the problems that come with it, how I solved said problems, and what I'm thinking for the future.
 
 #### What is LanguageDecks?
 
-LanguageDecks is a web app that allows users to generate flashcard decks for language learning at specific levels with specific theming. The decks are then exportable to Anki to be used for studying. It provides a consistent, reliable, and quick method for generation.
+[LanguageDecks.com](https://languagedecks.com)
+ is a web app that allows users to generate flashcard decks for language learning at specific levels with specific theming. The decks are then exportable to Anki to be used for studying. It provides a consistent, reliable, and quick method for generation.
 
 #### Why a flashcard generator?
 
-Flashcards are the most reliable and useful tool when learning languages. Anki is the gold standard for studying. My problem was that manually creating 1000+ flashcards takes too much time compared to other methods. I needed an automatic flashcard generator for language learning. There are plenty of flashcard generators, even for Anki flashcards, but most work as "automatic flashcards from your uploaded study materials", but none of them were specific to language learning.
+Flashcards are the most reliable and useful tool when learning languages. Anki is the gold standard for studying. My problem was that manually creating 1000+ flashcards takes too much time compared to other methods. I needed an automatic flashcard generator for language learning. There are plenty of flashcard generators, even for Anki flashcards, but most work as "automatic flashcards from your uploaded study materials", and none of them were specific to language learning.
 
 #### Tech Stack
 
@@ -41,7 +49,7 @@ This can be personal preference but I found that maintaining two separate repos 
 
 #### The Backend (.NET 9 API)
 
-- **Repository/Service Architecture**: Repositories work as the Data Access Layer, handling all Entity Framework interactions with PostgreSQL. Services work as the Data Manipulation Layer or logic layer—they handle any necessary changes to the data.
+- **Repository/Service Architecture**: Repositories work as the Data Access Layer, handling all Entity Framework interactions with PostgreSQL. Services work as the Data Manipulation Layer or logic layer,they handle any necessary changes to the data.
 - **SignalR for Real-time Updates**: Used for streaming live generation updates to the frontend, which was necessary for a good user experience when viewing generation progress.
 - **Why .NET vs. Node Backend**: There are arguments for both. The main reason I used a .NET backend was because I'm comfortable with it. There are some benefits like avoiding potential degrading rendering performance from too much computation in Next.js.
 
@@ -134,7 +142,7 @@ When generating more than 200 cards at a time, the total time to generate can go
 
 After playing around with some solutions, I concluded that the simplest, yet effective solution was to limit card generations to 100 cards at a time but introduce continued generation into a deck. This means when a user visits a deck in the app, there is an option to "add cards" which navigates the user through the typical deck creation process again, adding 100 cards at a time to the deck.
 
-This solution removes the need for simultaneous requests, preventing duplicate generations within the same response. It also allows the user to have more control over the deck's theming and contents to a very specific card count, increased card counts to large amounts (1000+) while still limiting the waiting time to 100 cards—all while avoiding the introduction of complicated solutions that could add more maintenance for the app.
+This solution removes the need for simultaneous requests, preventing duplicate generations within the same response. It also allows the user to have more control over the deck's theming and contents to a very specific card count, increased card counts to large amounts (1000+) while still limiting the waiting time to 100 cards all while avoiding the introduction of complicated solutions that could add more maintenance for the app.
 
 ## IX. Future Improvements
 
@@ -166,3 +174,5 @@ When creating a side-project, think of some functionality that YOU would use or 
 Creating this app has taught me many things, allowed me to stretch my development muscles, and revealed my weak spots as a developer. I now have a better understanding of the full software development lifecycle, which is crucial for growth in the industry. Setting up the hosting services and deployment automation revealed how much I don't know, while allowing me to dip my toes into devops. This was the major contributing factor that cleared my vision for pursuing a DevOps Engineer certificate in the near future.
 
 **Try LanguageDecks and give your feedback!**
+
+[LanguageDecks.com](https://languagedecks.com)
