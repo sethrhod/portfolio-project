@@ -20,7 +20,7 @@
     "@types/three": "^0.157.2",
     "babel-plugin-macros": "^3.1.0",
     "gray-matter": "^4.0.3",
-    "next": "latest",
+    "next": "15.5.8",
     "nodemailer": "^6.10.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
